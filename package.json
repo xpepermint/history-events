@@ -1,0 +1,44 @@
+{
+  "name": "history-events",
+  "version": "1.0.0",
+  "description": "Adds missing window.history events onpushstate, onreplacestate and onchangestate.",
+  "main": "index.js",
+  "scripts": {
+    "minimize": "./node_modules/.bin/uglifyjs index.js --compress --mangle --comments > dist/history-events.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xpepermint/history-events.git"
+  },
+  "keywords": [
+    "pushstate",
+    "popstate",
+    "replacestate",
+    "browser",
+    "history",
+    "events",
+    "window",
+    "document",
+    "html5",
+    "transition",
+    "url",
+    "location",
+    "href",
+    "router",
+    "back",
+    "forward",
+    "goto",
+    "link",
+    "react"
+  ],
+  "author": "Xpepermint",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xpepermint/history-events/issues"
+  },
+  "homepage": "https://github.com/xpepermint/history-events#readme",
+  "devDependencies": {
+    "uglify-js": "^2.4.24"
+  }
+}
