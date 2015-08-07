@@ -28,6 +28,8 @@ if (history.isHistorySupported()) {
   window.addEventListener('changestate', function(e) {
     console.log('URL changed');
   });
+
+  window.history.pushState(null, null, '/login'); // `changestate` will be triggered
 }
 ```
 
