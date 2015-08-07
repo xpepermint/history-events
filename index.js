@@ -51,16 +51,18 @@
 
     var pushState = history.pushState;
     history.pushState = function(state) {
+      var ps = pushState.apply(history, arguments);
       triggerEvent(window, 'pushstate', {state: state});
       triggerEvent(window, 'changestate', {state: state});
-      return pushState.apply(history, arguments);
+      return ps;
     }
 
     var replaceState = history.replaceState;
     history.replaceState = function(state) {
+      var rs = replaceState.apply(history, arguments);
       triggerEvent(window, 'replacestate', {state: state});
       triggerEvent(window, 'changestate', {state: state});
-      return replaceState.apply(history, arguments);
+      return rs;
     }
 
     addEventListener(window, 'popstate', function(state) {
