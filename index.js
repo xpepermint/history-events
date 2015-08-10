@@ -1,6 +1,6 @@
 (function() {
 
-  function triggerEvent(el, eventName, data) {
+  function triggerEvent(el, eventName, state) {
     var event;
     if (document.createEvent) {
       event = document.createEvent('HTMLEvents');
@@ -9,7 +9,7 @@
       event = document.createEventObject();
       event.eventType = eventName;
     }
-    event.data = data;
+    event.state = state;
     event.eventName = eventName;
     if (el.dispatchEvent) {
       el.dispatchEvent(event);
@@ -52,31 +52,32 @@
     var pushState = history.pushState;
     history.pushState = function(state) {
       var ps = pushState.apply(history, arguments);
-      triggerEvent(window, 'pushstate', {state: state});
-      triggerEvent(window, 'changestate', {state: state});
+      triggerEvent(window, 'pushstate', state);
+      triggerEvent(window, 'changestate', state);
       return ps;
     }
 
     var replaceState = history.replaceState;
     history.replaceState = function(state) {
       var rs = replaceState.apply(history, arguments);
-      triggerEvent(window, 'replacestate', {state: state});
-      triggerEvent(window, 'changestate', {state: state});
+      triggerEvent(window, 'replacestate', state);
+      triggerEvent(window, 'changestate', state);
       return rs;
     }
 
-    addEventListener(window, 'popstate', function(state) {
-      triggerEvent(window, 'changestate', {state: state});
+    addEventListener(window, 'popstate', function(e) {
+      triggerEvent(window, 'changestate', e.state);
     });
   }
 
-  if (typeof module != 'undefined') {
-    module.exports = {
-      isHistorySupported: isHistorySupported,
-      addEventListener: addEventListener,
-      removeEventListener: removeEventListener,
-      triggerEvent: triggerEvent
-    };
-  }
+  var publicInterface = {
+    isHistorySupported: isHistorySupported,
+    addEventListener: addEventListener,
+    removeEventListener: removeEventListener,
+    triggerEvent: triggerEvent
+  };
+  console.log( isHistorySupported())
+  if (isHistorySupported()) window.HistoryEvents = publicInterface;
+  if (typeof module != 'undefined') module.exports = publicInterface;
 
 })();
