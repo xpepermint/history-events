@@ -76,7 +76,6 @@
     removeEventListener: removeEventListener,
     triggerEvent: triggerEvent
   };
-  console.log( isHistorySupported())
   if (isHistorySupported()) window.HistoryEvents = publicInterface;
   if (typeof module != 'undefined') module.exports = publicInterface;
 
