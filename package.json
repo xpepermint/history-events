@@ -1,6 +1,6 @@
 {
   "name": "history-events",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Adds missing window.history events onpushstate, onreplacestate and onchangestate.",
   "main": "index.js",
   "scripts": {
